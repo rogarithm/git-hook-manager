@@ -27,7 +27,7 @@ class Installer
       hook_file=`ls #{hook_dir}`.sub(/\n/, '')
     end
     if hook_name != ''
-      hook_file=`ls #{hook_dir} | grep #{hook_name}`.sub(/\n/, '')
+      hook_file=`ls #{hook_dir} | grep '#{hook_name}'`.sub(/\n/, '')
     end
 
     "#{hook_dir}/#{hook_file}"
