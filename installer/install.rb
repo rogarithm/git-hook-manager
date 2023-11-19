@@ -16,13 +16,20 @@ class Installer
     wheres
   end
 
-  def find_hook_location(trigger_point)
+  def find_hook_location(trigger_point, hook_name='')
     hook_dir=File.join(
-      File.expand_path(@source_root),
+      File.expand_path('~/tools/git-hooks/'),
       trigger_point.sub(/-/, '_'),
       'bin'
     )
-    hook_file=`ls #{hook_dir}`.sub(/\n/, '')
+
+    if hook_name == ''
+      hook_file=`ls #{hook_dir}`.sub(/\n/, '')
+    end
+    if hook_name != ''
+      hook_file=`ls #{hook_dir} | grep #{hook_name}`.sub(/\n/, '')
+    end
+
     "#{hook_dir}/#{hook_file}"
   end
 
