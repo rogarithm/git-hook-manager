@@ -1,7 +1,14 @@
+require 'psych'
+
 class Installer
 
   def initialize
     @source_root = '~/tools/git-hooks/'
+  end
+
+  def load_config
+    puts File.expand_path('config/config.yaml')
+    #config = Psych.load_file(File.expand_path('config/config.yaml'))
   end
 
   def prepare_paths_to_install(install_path_list)
