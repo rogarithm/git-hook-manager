@@ -9,7 +9,11 @@ class Installer
     File.open(install_path_list, "r") do |f|
       f.each_line do |line|
         wheres.push(
-          [line.split(',')[0].strip, line.split(',')[1].strip]
+          [
+            line.split(',')[0].strip,
+            line.split(',')[1].strip,
+            line.split(',')[2].strip
+          ]
         )
       end
     end
@@ -38,9 +42,13 @@ class Installer
     target_infos.each do |target_info|
       where = target_info[0]
       trigger_point = target_info[1]
+      hook_name = target_info[2] != '' ? target_info[2] : ''
       install_infos.push(
-        [find_target_location(where, trigger_point),
-         trigger_point]
+        [
+          find_target_location(where, trigger_point),
+          trigger_point,
+          hook_name
+        ]
       )
     end
     install_infos
