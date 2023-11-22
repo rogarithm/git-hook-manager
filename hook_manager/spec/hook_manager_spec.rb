@@ -23,9 +23,6 @@ describe "Hook Manager", "operations" do
   #it "설정 정보를 갖는 파일을 로드할 수 있다" do
   #  @hook_manager.load_config
   #end
-  it "훅 설정 정보를 가져올 수 있다" do
-    @hook_manager.read_configs('./hook_manager/spec/data/install_list').should == [['/tmp/test_install_git_hook', @trigger_point, @hook_name], ['/tmp/test_install_git_hook2', @trigger_point, @hook_name]]
-  end
 
 
   it "설정 파일 내용으로부터 훅을 설치하는 데 필요한 정보를 계산할 수 있다" do

@@ -4,22 +4,6 @@ class HookManager
     @source_root = '~/tools/git-hooks/'
   end
 
-  def read_configs(source)
-    result = []
-    File.open(source, "r") do |configs|
-      configs.each_line do |config|
-        result.push(
-          [
-            config.split(',')[0].strip,
-            config.split(',')[1].strip,
-            config.split(',')[2].strip
-          ]
-        )
-      end
-    end
-    result
-  end
-
   def make_install_infos(source)
     target_infos = read_configs(source)
     install_infos = []
@@ -36,6 +20,22 @@ class HookManager
       )
     end
     install_infos
+  end
+
+  def read_configs(source)
+    result = []
+    File.open(source, "r") do |configs|
+      configs.each_line do |config|
+        result.push(
+          [
+            config.split(',')[0].strip,
+            config.split(',')[1].strip,
+            config.split(',')[2].strip
+          ]
+        )
+      end
+    end
+    result
   end
 
   def find_target_location(where, trigger_point)
@@ -102,5 +102,6 @@ class HookManager
     end
   end
 
+  private :read_configs
   private :find_target_location
 end
