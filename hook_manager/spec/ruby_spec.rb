@@ -21,7 +21,7 @@ describe "Regex", "operations" do
 
   it "" do
     result = []
-    File.open('installer/spec/data/install_list', "r") do |f|
+    File.open('hook_manager/spec/data/install_list', "r") do |f|
       f.each_line do |line|
         result << "#{line.split(',')[0].strip}"
       end
@@ -32,7 +32,7 @@ describe "Regex", "operations" do
   it "push array to array" do
     result = []
     install_info = []
-    File.open('installer/spec/data/install_list', "r") do |f|
+    File.open('hook_manager/spec/data/install_list', "r") do |f|
       f.each_line do |line|
         result.push([
             line.split(',')[0].strip,
