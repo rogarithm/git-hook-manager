@@ -1,4 +1,4 @@
-require_relative '../install'
+require_relative '../hook_manager'
 
 describe "Hook Manager", "operations" do
 
