@@ -1,23 +1,23 @@
-require_relative 'installer/install'
+require_relative 'hook_manager/hook_manager'
 
 task :install do
   puts "install hooks!"
-  installer = Installer.new
-  installer.install_hook(
-    installer.make_install_infos(
-      installer.prepare_paths_to_install('./installer/install_list')
+  hook_manager = HookManager.new
+  hook_manager.install_hook(
+    hook_manager.make_install_infos(
+      hook_manager.prepare_paths_to_install('./hook_manager/install_list')
     )
   )
-  installer.check_hooks_installed('./installer/install_list')
+  hook_manager.check_hooks_installed('./hook_manager/install_list')
 end
 
 task :uninstall do
   puts "uninstall hooks!"
-  installer = Installer.new
-  installer.uninstall_hook(
-    installer.make_install_infos(
-      installer.prepare_paths_to_install('./installer/install_list')
+  hook_manager = HookManager.new
+  hook_manager.uninstall_hook(
+    hook_manager.make_install_infos(
+      hook_manager.prepare_paths_to_install('./hook_manager/install_list')
     )
   )
-  installer.check_hooks_installed('./installer/install_list')
+  hook_manager.check_hooks_installed('./hook_manager/install_list')
 end
