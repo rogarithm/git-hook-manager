@@ -35,15 +35,15 @@ class HookManager
     )
   end
 
-  def install_hook(install_infos)
-    install_infos.each do |install_info|
-      expanded_target = install_info[0]
-      trigger_point = install_info[1]
-      hook_name = install_info[2]
-      if (File.symlink?(expanded_target) == false)
+  def install_hook(targets_info)
+    targets_info.each do |target_info|
+      target_location = target_info[0]
+      trigger_point = target_info[1]
+      hook_name = target_info[2]
+      if (File.symlink?(target_location) == false)
         File.symlink(
           find_hook_location(trigger_point, hook_name),
-          expanded_target
+          target_location
         )
       end
     end
