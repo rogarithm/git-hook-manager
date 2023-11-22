@@ -12,12 +12,12 @@ class HookManager
         config.split(',').each do |item|
           target_info << item.strip
         end
-        where = target_info[0]
+        root_dir = target_info[0]
         trigger_point = target_info[1]
         hook_name = target_info[2] != '' ? target_info[2] : ''
         targets_info.push(
           [
-            find_target_location(where, trigger_point),
+            find_target_location(root_dir, trigger_point),
             trigger_point,
             hook_name
           ]
@@ -27,9 +27,9 @@ class HookManager
     targets_info
   end
 
-  def find_target_location(where, trigger_point)
+  def find_target_location(root_dir, trigger_point)
     File.join(
-      File.expand_path(where),
+      File.expand_path(root_dir),
       '.git/hooks',
       trigger_point
     )
