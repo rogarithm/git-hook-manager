@@ -4,20 +4,20 @@ class HookManager
     @source_root = '~/tools/git-hooks/'
   end
 
-  def prepare_paths_to_install(install_path_list)
-    wheres = []
-    File.open(install_path_list, "r") do |f|
-      f.each_line do |line|
-        wheres.push(
+  def read_configs(source)
+    result = []
+    File.open(source, "r") do |configs|
+      configs.each_line do |config|
+        result.push(
           [
-            line.split(',')[0].strip,
-            line.split(',')[1].strip,
-            line.split(',')[2].strip
+            config.split(',')[0].strip,
+            config.split(',')[1].strip,
+            config.split(',')[2].strip
           ]
         )
       end
     end
-    wheres
+    result
   end
 
   def make_install_infos(target_infos)
@@ -87,7 +87,7 @@ class HookManager
 
   def check_hooks_installed(install_path_list)
     install_infos = make_install_infos(
-      prepare_paths_to_install(install_path_list)
+      read_configs(install_path_list)
     )
     install_infos.each do |install_info|
       expanded_target = install_info[0]

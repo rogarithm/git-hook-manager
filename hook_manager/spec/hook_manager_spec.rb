@@ -14,7 +14,7 @@ describe "Hook Manager", "operations" do
   after(:each) do
     @hook_manager.uninstall_hook(
       @hook_manager.make_install_infos(
-        @hook_manager.prepare_paths_to_install('./hook_manager/spec/data/install_list')
+        @hook_manager.read_configs('./hook_manager/spec/data/install_list')
       )
     )
   end
@@ -24,18 +24,18 @@ describe "Hook Manager", "operations" do
   #  @hook_manager.load_config
   #end
   it "훅 설정 정보를 가져올 수 있다" do
-    @hook_manager.prepare_paths_to_install('./hook_manager/spec/data/install_list').should == [['/tmp/test_install_git_hook', @trigger_point, @hook_name], ['/tmp/test_install_git_hook2', @trigger_point, @hook_name]]
+    @hook_manager.read_configs('./hook_manager/spec/data/install_list').should == [['/tmp/test_install_git_hook', @trigger_point, @hook_name], ['/tmp/test_install_git_hook2', @trigger_point, @hook_name]]
   end
 
 
   it "설정 파일 내용으로부터 훅을 설치하는 데 필요한 정보를 계산할 수 있다" do
     @hook_manager.make_install_infos(
-      @hook_manager.prepare_paths_to_install('./hook_manager/spec/data/install_list2')
+      @hook_manager.read_configs('./hook_manager/spec/data/install_list2')
     ).should == [[File.expand_path(@install_full_dir), @trigger_point, @hook_name]]
   end
   it "설정 파일 내용으로부터 여러 개의 훅을 설치하는 데 필요한 정보를 계산할 수 있다" do
     @hook_manager.make_install_infos(
-      @hook_manager.prepare_paths_to_install('./hook_manager/spec/data/install_list')
+      @hook_manager.read_configs('./hook_manager/spec/data/install_list')
     ).should ==
     [
       [File.expand_path(@install_full_dir), @trigger_point, @hook_name],
@@ -55,7 +55,7 @@ describe "Hook Manager", "operations" do
   it "훅을 설치할 위치와 발동 조건을 입력하면 훅을 설치한다" do
     @hook_manager.install_hook(
       @hook_manager.make_install_infos(
-        @hook_manager.prepare_paths_to_install('./hook_manager/spec/data/install_list2')
+        @hook_manager.read_configs('./hook_manager/spec/data/install_list2')
       )
     )
     File.symlink?(@install_full_dir).should == true
@@ -63,7 +63,7 @@ describe "Hook Manager", "operations" do
   it "한 번에 두 곳에 훅을 설치할 수 있다" do
     @hook_manager.install_hook(
       @hook_manager.make_install_infos(
-        @hook_manager.prepare_paths_to_install('./hook_manager/spec/data/install_list')
+        @hook_manager.read_configs('./hook_manager/spec/data/install_list')
       )
     )
     File.symlink?(@install_full_dir).should == true
