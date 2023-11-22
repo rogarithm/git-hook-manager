@@ -5,37 +5,23 @@ class HookManager
   end
 
   def make_targets_info(source)
-    raw_infos = read_configs(source)
-    install_infos = []
-    raw_infos.each do |target_info|
-      where = target_info[0]
-      trigger_point = target_info[1]
-      hook_name = target_info[2] != '' ? target_info[2] : ''
-      install_infos.push(
-        [
-          find_target_location(where, trigger_point),
-          trigger_point,
-          hook_name
-        ]
-      )
-    end
-    install_infos
-  end
-
-  def read_configs(source)
-    result = []
+    targets_info = []
     File.open(source, "r") do |configs|
       configs.each_line do |config|
-        result.push(
+        target_info = config.split(',')
+        where = target_info[0].strip
+        trigger_point = target_info[1].strip
+        hook_name = target_info[2].strip != '' ? target_info[2].strip : ''
+        targets_info.push(
           [
-            config.split(',')[0].strip,
-            config.split(',')[1].strip,
-            config.split(',')[2].strip
+            find_target_location(where, trigger_point),
+            trigger_point,
+            hook_name
           ]
         )
       end
     end
-    result
+    targets_info
   end
 
   def find_target_location(where, trigger_point)
@@ -102,6 +88,5 @@ class HookManager
     end
   end
 
-  private :read_configs
   private :find_target_location
 end
