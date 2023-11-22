@@ -20,23 +20,6 @@ class HookManager
     wheres
   end
 
-  def find_hook_location(trigger_point, hook_name='')
-    hook_dir=File.join(
-      File.expand_path('~/tools/git-hooks/'),
-      trigger_point.sub(/-/, '_'),
-      'bin'
-    )
-
-    if hook_name == ''
-      hook_file=`ls #{hook_dir}`.sub(/\n/, '')
-    end
-    if hook_name != ''
-      hook_file=`ls #{hook_dir} | grep '#{hook_name}'`.sub(/\n/, '')
-    end
-
-    "#{hook_dir}/#{hook_file}"
-  end
-
   def make_install_infos(target_infos)
     install_infos = []
     target_infos.each do |target_info|
@@ -74,6 +57,23 @@ class HookManager
         )
       end
     end
+  end
+
+  def find_hook_location(trigger_point, hook_name='')
+    hook_dir=File.join(
+      File.expand_path('~/tools/git-hooks/'),
+      trigger_point.sub(/-/, '_'),
+      'bin'
+    )
+
+    if hook_name == ''
+      hook_file=`ls #{hook_dir}`.sub(/\n/, '')
+    end
+    if hook_name != ''
+      hook_file=`ls #{hook_dir} | grep '#{hook_name}'`.sub(/\n/, '')
+    end
+
+    "#{hook_dir}/#{hook_file}"
   end
 
   def uninstall_hook(uninstall_infos)
