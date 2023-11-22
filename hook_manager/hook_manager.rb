@@ -20,7 +20,8 @@ class HookManager
     result
   end
 
-  def make_install_infos(target_infos)
+  def make_install_infos(source)
+    target_infos = read_configs(source)
     install_infos = []
     target_infos.each do |target_info|
       where = target_info[0]
@@ -87,7 +88,7 @@ class HookManager
 
   def check_hooks_installed(install_path_list)
     install_infos = make_install_infos(
-      read_configs(install_path_list)
+      install_path_list
     )
     install_infos.each do |install_info|
       expanded_target = install_info[0]
