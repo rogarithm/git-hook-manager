@@ -1,9 +1,9 @@
 require_relative '../install'
 
-describe "Installer", "operations" do
+describe "Hook Manager", "operations" do
 
   before(:each) do
-    @installer=Installer.new
+    @installer=HookManager.new
     @trigger_point='pre-push'
     @hook_name='is_remote_updated'
 

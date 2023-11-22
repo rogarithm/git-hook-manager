@@ -1,4 +1,4 @@
-class Installer
+class HookManager
 
   def initialize
     @source_root = '~/tools/git-hooks/'
