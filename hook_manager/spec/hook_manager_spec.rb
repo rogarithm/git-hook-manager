@@ -13,7 +13,7 @@ describe "Hook Manager", "operations" do
 
   after(:each) do
     @hook_manager.uninstall_hook(
-      @hook_manager.make_install_infos(
+      @hook_manager.make_targets_info(
         './hook_manager/spec/data/install_list'
       )
     )
@@ -26,12 +26,12 @@ describe "Hook Manager", "operations" do
 
 
   it "설정 파일 내용으로부터 훅을 설치하는 데 필요한 정보를 계산할 수 있다" do
-    @hook_manager.make_install_infos(
+    @hook_manager.make_targets_info(
       './hook_manager/spec/data/install_list2'
     ).should == [[File.expand_path(@install_full_dir), @trigger_point, @hook_name]]
   end
   it "설정 파일 내용으로부터 여러 개의 훅을 설치하는 데 필요한 정보를 계산할 수 있다" do
-    @hook_manager.make_install_infos(
+    @hook_manager.make_targets_info(
       './hook_manager/spec/data/install_list'
     ).should ==
     [
@@ -51,7 +51,7 @@ describe "Hook Manager", "operations" do
 
   it "훅을 설치할 위치와 발동 조건을 입력하면 훅을 설치한다" do
     @hook_manager.install_hook(
-      @hook_manager.make_install_infos(
+      @hook_manager.make_targets_info(
         './hook_manager/spec/data/install_list2'
       )
     )
@@ -59,7 +59,7 @@ describe "Hook Manager", "operations" do
   end
   it "한 번에 두 곳에 훅을 설치할 수 있다" do
     @hook_manager.install_hook(
-      @hook_manager.make_install_infos(
+      @hook_manager.make_targets_info(
         './hook_manager/spec/data/install_list'
       )
     )

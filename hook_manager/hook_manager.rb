@@ -4,10 +4,10 @@ class HookManager
     @source_root = '~/tools/git-hooks/'
   end
 
-  def make_install_infos(source)
-    target_infos = read_configs(source)
+  def make_targets_info(source)
+    raw_infos = read_configs(source)
     install_infos = []
-    target_infos.each do |target_info|
+    raw_infos.each do |target_info|
       where = target_info[0]
       trigger_point = target_info[1]
       hook_name = target_info[2] != '' ? target_info[2] : ''
@@ -87,7 +87,7 @@ class HookManager
   end
 
   def check_hooks_installed(install_path_list)
-    install_infos = make_install_infos(
+    install_infos = make_targets_info(
       install_path_list
     )
     install_infos.each do |install_info|
