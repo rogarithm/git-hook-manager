@@ -8,10 +8,13 @@ class HookManager
     targets_info = []
     File.open(source, "r") do |configs|
       configs.each_line do |config|
-        target_info = config.split(',')
-        where = target_info[0].strip
-        trigger_point = target_info[1].strip
-        hook_name = target_info[2].strip != '' ? target_info[2].strip : ''
+        target_info = []
+        config.split(',').each do |item|
+          target_info << item.strip
+        end
+        where = target_info[0]
+        trigger_point = target_info[1]
+        hook_name = target_info[2] != '' ? target_info[2] : ''
         targets_info.push(
           [
             find_target_location(where, trigger_point),

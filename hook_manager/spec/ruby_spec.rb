@@ -1,4 +1,13 @@
 describe "Regex", "operations" do
+  it "블록을 이용해 배열의 각 요소에 메서드를 적용할 수 있다" do
+    a = [' a', 'b ', ' c ']
+    trimmed = []
+    a.each do |item|
+      trimmed << item.strip
+    end
+    trimmed.should == ['a', 'b', 'c']
+  end
+
   it "콤마 기준으로 앞쪽 문자열만 가져올 수 있다" do
     result = []
     str = "/tmp/test_install_git_hook, pre-push"
