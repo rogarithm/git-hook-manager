@@ -70,7 +70,6 @@ class HookManager
     end
     hook_file=`ls #{hook_dir} | grep '#{hook_name}'`.sub(/\n/, '')
     return "#{hook_dir}/#{hook_file}"
-
   end
 
   def uninstall_hook(uninstall_infos)
