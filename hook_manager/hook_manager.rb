@@ -53,6 +53,10 @@ class HookManager
     end
   end
 
+  def only_one_hook?(hook_name)
+    hook_name == ''
+  end
+
   def find_hook_location(trigger_point, hook_name='')
     hook_dir=File.join(
       File.expand_path('~/tools/git-hooks/'),
@@ -60,14 +64,13 @@ class HookManager
       'bin'
     )
 
-    if hook_name == ''
+    if only_one_hook?(hook_name)
       hook_file=`ls #{hook_dir}`.sub(/\n/, '')
+      return "#{hook_dir}/#{hook_file}"
     end
-    if hook_name != ''
-      hook_file=`ls #{hook_dir} | grep '#{hook_name}'`.sub(/\n/, '')
-    end
+    hook_file=`ls #{hook_dir} | grep '#{hook_name}'`.sub(/\n/, '')
+    return "#{hook_dir}/#{hook_file}"
 
-    "#{hook_dir}/#{hook_file}"
   end
 
   def uninstall_hook(uninstall_infos)
