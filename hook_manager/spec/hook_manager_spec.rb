@@ -42,7 +42,11 @@ describe "Hook Manager", "operations" do
   it "훅 이름이 없을 때도 훅 설치 정보를 계산할 수 있다" do
     @hook_manager.make_targets_info(
       './hook_manager/spec/data/install_list3'
-    ).should == [[File.expand_path('/tmp/test_install_git_hook/.git/hooks/post-commit'), 'post-commit', '']]
+    ).should == [
+      [File.expand_path('/tmp/test_install_git_hook/.git/hooks/post-commit'), 'post-commit', ''],
+      [File.expand_path('/tmp/test_install_git_hook2/.git/hooks/post-commit'), 'post-commit', ''],
+      [File.expand_path('/tmp/test_install_git_hook3/.git/hooks/post-commit'), 'post-commit', 'something']
+    ]
   end
 
 

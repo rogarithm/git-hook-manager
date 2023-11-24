@@ -16,8 +16,6 @@ class HookManager
         trigger_point = target_info[1]
         if target_info[2].nil?
           hook_name = ''
-        elsif target_info[2].empty?
-          hook_name = ''
         else
           hook_name =  target_info[2]
         end
