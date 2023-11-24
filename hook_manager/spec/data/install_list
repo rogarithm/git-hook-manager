@@ -1,0 +1,2 @@
+/tmp/test_install_git_hook, pre-push, is_remote_updated
+/tmp/test_install_git_hook2, pre-push, is_remote_updated

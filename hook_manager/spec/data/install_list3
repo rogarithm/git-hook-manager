@@ -1,0 +1,3 @@
+/tmp/test_install_git_hook, post-commit
+/tmp/test_install_git_hook2, post-commit,
+/tmp/test_install_git_hook3, post-commit, something
