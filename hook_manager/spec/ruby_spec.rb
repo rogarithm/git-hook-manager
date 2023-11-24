@@ -1,4 +1,13 @@
 describe "Regex", "operations" do
+  it "문자열이 비었는지 확인할 수 있다" do
+    s = ''
+    s.empty?.should == true
+    e = nil
+    e.nil?.should == true
+    (s.nil? or s.empty?).should == true
+    (e.nil? or e.empty?).should == true
+  end
+
   it "블록을 이용해 배열의 각 요소에 메서드를 적용할 수 있다" do
     a = [' a', 'b ', ' c ']
     trimmed = []

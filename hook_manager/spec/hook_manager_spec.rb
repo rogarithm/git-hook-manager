@@ -39,6 +39,11 @@ describe "Hook Manager", "operations" do
       [File.expand_path(@install_full_dir2), @trigger_point, @hook_name]
     ]
   end
+  it "훅 이름이 없을 때도 훅 설치 정보를 계산할 수 있다" do
+    @hook_manager.make_targets_info(
+      './hook_manager/spec/data/install_list3'
+    ).should == [[File.expand_path('/tmp/test_install_git_hook/.git/hooks/post-commit'), 'post-commit', '']]
+  end
 
 
   it "동일한 발동 조건에 여러 훅이 있을 경우 훅 소스 위치를 계산할 때 훅 이름을 지정할 수 있다" do
