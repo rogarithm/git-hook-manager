@@ -2,12 +2,8 @@ require 'psych'
 
 class HookManager
   def initialize
-    @source_root = '~/tools/git-hooks/'
-  end
-
-  def load_config
-    puts File.expand_path('config/config.yaml')
-    #config = Psych.load_file(File.expand_path('config/config.yaml'))
+    config = Psych.load_file(File.expand_path('config/config.yaml'))
+    @source_root = config['source_root']
   end
 
   def make_targets_info(source)
@@ -65,7 +61,7 @@ class HookManager
 
   def find_hook_location(trigger_point, hook_name='')
     hook_dir=File.join(
-      File.expand_path('~/tools/git-hooks/'),
+      File.expand_path(@source_root),
       trigger_point.sub(/-/, '_'),
       'bin'
     )
