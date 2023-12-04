@@ -1,7 +1,13 @@
-class HookManager
+require 'psych'
 
+class HookManager
   def initialize
     @source_root = '~/tools/git-hooks/'
+  end
+
+  def load_config
+    puts File.expand_path('config/config.yaml')
+    #config = Psych.load_file(File.expand_path('config/config.yaml'))
   end
 
   def make_targets_info(source)
